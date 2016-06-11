@@ -5,12 +5,12 @@ import java.util.List;
 import handy.marketsim.Constants;
 import handy.marketsim.MarketPoint;
 
-public class SimpleDipInvestor extends Investor{
+public class SimpleDipIndexInvestor extends IndexInvestor{
 
 	private double dipPercentageThreshold;
 	private int dipDayWindow;
 	
-	public SimpleDipInvestor(int investmentCashEachPeriod, double dipPercentageThreshold, int dipDayWindow){
+	public SimpleDipIndexInvestor(int investmentCashEachPeriod, double dipPercentageThreshold, int dipDayWindow){
 		this.investmentCashEachPeriod = investmentCashEachPeriod;
 		this.name = "Simple Dip Investor";
 		this.dipPercentageThreshold = dipPercentageThreshold;

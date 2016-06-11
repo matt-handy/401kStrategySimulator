@@ -8,12 +8,15 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class MarketIngester {
+public class MarketPointIngester {
 
-	public static List<MarketPoint> getPoints(String filename, int rowStart, int dateColumn, int priceColumn) {
+	public static List<MarketPoint> getPoints(String filename, int rowStart, int dateColumn, int priceColumn, String format) {
 		List<MarketPoint> points = new ArrayList<MarketPoint>();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
 
+		if(Constants.DEBUG){
+			System.out.println("Ingesting: " + filename);
+		}
 		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 			String line;
 			int idx = 0;
@@ -32,6 +35,7 @@ public class MarketIngester {
 		}
 
 		Collections.sort(points);
+		
 		return points;
 	}
 }

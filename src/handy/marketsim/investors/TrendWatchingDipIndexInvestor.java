@@ -5,13 +5,13 @@ import java.util.List;
 import handy.marketsim.Constants;
 import handy.marketsim.MarketPoint;
 
-public class TrendWatchingDipInvestor extends Investor {
+public class TrendWatchingDipIndexInvestor extends IndexInvestor {
 
 	private double dipPercentageThreshold;
 	private int dipDayWindow;
 	private int bottomingPeriod;
 
-	public TrendWatchingDipInvestor(int investmentCashEachPeriod, double dipPercentageThreshold, int dipDayWindow,
+	public TrendWatchingDipIndexInvestor(int investmentCashEachPeriod, double dipPercentageThreshold, int dipDayWindow,
 			int bottomingPeriod) {
 		this.investmentCashEachPeriod = investmentCashEachPeriod;
 		this.name = "Trend Watching Dip Investor";

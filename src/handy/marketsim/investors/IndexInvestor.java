@@ -4,7 +4,7 @@ import java.util.List;
 
 import handy.marketsim.MarketPoint;
 
-public abstract class Investor {
+public abstract class IndexInvestor {
 	protected int investmentCashEachPeriod;
 	protected double totalCashInvested = 0;
 	protected double cash = 0;

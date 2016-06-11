@@ -5,9 +5,9 @@ import java.util.List;
 import handy.marketsim.Constants;
 import handy.marketsim.MarketPoint;
 
-public class ContinuousInvestor extends Investor {
+public class ContinuousIndexInvestor extends IndexInvestor {
 
-	public ContinuousInvestor (int investmentCashEachPeriod){
+	public ContinuousIndexInvestor (int investmentCashEachPeriod){
 		this.investmentCashEachPeriod = investmentCashEachPeriod;
 		this.name = "Continuous Contributor";
 	}

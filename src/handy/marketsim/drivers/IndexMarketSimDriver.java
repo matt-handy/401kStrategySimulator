@@ -1,26 +1,29 @@
-package handy.marketsim;
+package handy.marketsim.drivers;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import handy.marketsim.investors.ContinuousInvestor;
-import handy.marketsim.investors.Investor;
-import handy.marketsim.investors.SimpleDipInvestor;
-import handy.marketsim.investors.TrendWatchingDipInvestor;
+import handy.marketsim.Constants;
+import handy.marketsim.MarketPointIngester;
+import handy.marketsim.MarketPoint;
+import handy.marketsim.investors.ContinuousIndexInvestor;
+import handy.marketsim.investors.IndexInvestor;
+import handy.marketsim.investors.SimpleDipIndexInvestor;
+import handy.marketsim.investors.TrendWatchingDipIndexInvestor;
 
-public class MarketSimDriver {
+public class IndexMarketSimDriver {
 
 	public static void main(String[] args) {
-		List<MarketPoint> points = MarketIngester.getPoints("table.csv", 1, 0, 6);
+		List<MarketPoint> points = MarketPointIngester.getPoints("table.csv", 1, 0, 6, "yyyy-MM-dd");
 		MarketPoint lastPoint = null;
-		Investor continuous = new ContinuousInvestor(300);
+		IndexInvestor continuous = new ContinuousIndexInvestor(300);
 		//Set 10% as dip over 90 days threshold
-		Investor simpleDip = new SimpleDipInvestor(300, .1, 90); 
+		IndexInvestor simpleDip = new SimpleDipIndexInvestor(300, .1, 90); 
 		//Buy more at 30% dip over 90 days, but stabilize to less than 5% variation over the last 10 days
-		Investor trendDip = new TrendWatchingDipInvestor(300, .3, 90, 10); 
-		List<Investor> investors = new ArrayList<Investor>();
+		IndexInvestor trendDip = new TrendWatchingDipIndexInvestor(300, .3, 90, 10); 
+		List<IndexInvestor> investors = new ArrayList<IndexInvestor>();
 		investors.add(continuous);
 		investors.add(simpleDip);
 		investors.add(trendDip);
@@ -44,7 +47,7 @@ public class MarketSimDriver {
 						System.out.println("Payday, making contributions");
 					}
 					 
-			    	for(Investor investor : investors){
+			    	for(IndexInvestor investor : investors){
 			    		investor.makeBiweeklyContribution();
 			    	}
 			    	//Get paid 14 days from now
@@ -64,7 +67,7 @@ public class MarketSimDriver {
 						System.out.println("Market day, we closed at: " + lastPoint.getPrice());
 					}
 					
-					for(Investor investor: investors){
+					for(IndexInvestor investor: investors){
 						investor.processPoint(points, matchPointIdx);
 					}
 				}
@@ -73,7 +76,7 @@ public class MarketSimDriver {
 			
 			System.out.println("Simulation complete");
 			
-			for(Investor investor : investors){
+			for(IndexInvestor investor : investors){
 				System.out.printf("%s total cash invested: $%.2f\n", investor.getName(), investor.getTotalCashInvested());
 				System.out.printf("Final investment worth: $%.2f\n", (investor.getShares() * lastPoint.getPrice()));
 				System.out.printf("Final cash holding: $%.2f\n", investor.getCash());
