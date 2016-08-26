@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import handy.marketsim.Constants;
-import handy.marketsim.MarketPoint;
 import handy.marketsim.Position;
 
 public abstract class PortfolioInvestor {

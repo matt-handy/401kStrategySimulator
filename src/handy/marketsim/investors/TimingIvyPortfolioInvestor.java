@@ -1,6 +1,5 @@
 package handy.marketsim.investors;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import handy.marketsim.Constants;
